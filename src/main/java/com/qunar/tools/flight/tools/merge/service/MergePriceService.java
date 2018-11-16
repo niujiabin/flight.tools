@@ -2,7 +2,7 @@ package com.qunar.tools.flight.tools.merge.service;
 
 import com.qunar.tools.flight.tools.merge.MergePriceResult;
 import com.qunar.tools.flight.tools.packaging.PackageParam;
-import com.qunar.tools.flight.tools.router.RouterAggregationBean;
+import com.qunar.tools.flight.tools.router.RouterAggregationMessageBean;
 
 /**
  *
@@ -23,5 +23,5 @@ public interface MergePriceService {
      * @param queryId  查询id
      * @param routerAggregationBean router系统的聚合结果
      */
-    void doMergeFromMergeSys(String queryId,final RouterAggregationBean routerAggregationBean);
+    void doMergeFromMergeSys(String queryId,final RouterAggregationMessageBean routerAggregationBean);
 }

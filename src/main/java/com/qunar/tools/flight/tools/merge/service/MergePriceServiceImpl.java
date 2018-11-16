@@ -4,7 +4,7 @@ package com.qunar.tools.flight.tools.merge.service;
 
 import com.qunar.tools.flight.tools.merge.MergePriceResult;
 import com.qunar.tools.flight.tools.packaging.PackageParam;
-import com.qunar.tools.flight.tools.router.RouterAggregationBean;
+import com.qunar.tools.flight.tools.router.RouterAggregationMessageBean;
 
 import javax.annotation.Resource;
 
@@ -24,8 +24,11 @@ public class MergePriceServiceImpl implements MergePriceService {
         return null;
     }
 
+
+
     @Override
-    public void doMergeFromMergeSys(String queryId, RouterAggregationBean routerAggregationBean) {
+    public void doMergeFromMergeSys(String queryId, RouterAggregationMessageBean routerAggregationBean) {
+
 
     }
 
