@@ -60,6 +60,11 @@
             <version>${common-lang3.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.qunar.flight</groupId>
+            <artifactId>f_inter_block_price_api</artifactId>
+            <version>1.0.21</version>
+        </dependency>
 
     </dependencies>
 

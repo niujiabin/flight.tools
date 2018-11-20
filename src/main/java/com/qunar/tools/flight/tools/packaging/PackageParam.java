@@ -91,25 +91,6 @@ public class PackageParam implements Serializable {
      */
     private boolean isIncrement;
 
-    /**
-     * 单程 or 往返 or 缺口
-     */
-    private int tripType;
-
-    public int tripType() {
-
-        if (flightOriginDestinationBean.size() == 1) {
-            return TripType.ONE_WAY;
-        } else if (flightOriginDestinationBean.size() == 2) {
-            FlightOriginDestinationBean f1 = flightOriginDestinationBean.get(0);
-            FlightOriginDestinationBean f2 = flightOriginDestinationBean.get(1);
-            if (f1.getOrigin().equals(f2.getDestination()) && f1.getDestination().equals(f2.getOrigin())) {
-                return TripType.ROUND_WAY;
-            }
-        }
-        return TripType.OPEN_JAW;
-    }
-
 
     public boolean isIncrement() {
         return isIncrement;

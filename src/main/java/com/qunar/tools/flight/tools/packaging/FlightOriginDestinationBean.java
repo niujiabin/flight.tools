@@ -3,7 +3,6 @@ package com.qunar.tools.flight.tools.packaging;
 import java.util.Objects;
 
 /**
- *
  * @author jiabin.niu
  * @date 2018.11
  * <p>
@@ -23,12 +22,15 @@ public class FlightOriginDestinationBean {
     /**
      * 起飞日期
      */
-    private String dateOfTakeOff;
+    private String departureDate;
+
+    public FlightOriginDestinationBean() {
+    }
 
     public FlightOriginDestinationBean(String origin, String destination, String dateOfTakeOff) {
         this.origin = origin;
         this.destination = destination;
-        this.dateOfTakeOff = dateOfTakeOff;
+        this.departureDate = dateOfTakeOff;
     }
 
     public String getOrigin() {
@@ -47,12 +49,13 @@ public class FlightOriginDestinationBean {
         this.destination = destination;
     }
 
-    public String getDateOfTakeOff() {
-        return dateOfTakeOff;
+
+    public String getDepartureDate() {
+        return departureDate;
     }
 
-    public void setDateOfTakeOff(String dateOfTakeOff) {
-        this.dateOfTakeOff = dateOfTakeOff;
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = departureDate;
     }
 
     @Override
@@ -66,7 +69,7 @@ public class FlightOriginDestinationBean {
 
         FlightOriginDestinationBean f = (FlightOriginDestinationBean) obj;
 
-        return Objects.equals(f.getDateOfTakeOff(), dateOfTakeOff)
+        return Objects.equals(f.getDepartureDate(), departureDate)
                 && Objects.equals(f.getDestination(), destination)
                 && Objects.equals(f.getOrigin(), origin);
     }
@@ -76,7 +79,7 @@ public class FlightOriginDestinationBean {
     public int hashCode() {
         int result = origin != null ? origin.hashCode() : 0;
         result = 31 * result + (destination != null ? destination.hashCode() : 0);
-        result = 31 * result + (dateOfTakeOff != null ? dateOfTakeOff.hashCode() : 0);
+        result = 31 * result + (departureDate != null ? departureDate.hashCode() : 0);
         return result;
     }
 
@@ -85,7 +88,7 @@ public class FlightOriginDestinationBean {
         return "FlightOriginDestinationBean{" +
                 "origin='" + origin + '\'' +
                 ", destination='" + destination + '\'' +
-                ", dateOfTakeOff='" + dateOfTakeOff + '\'' +
+                ", departureDate='" + departureDate + '\'' +
                 '}';
     }
 

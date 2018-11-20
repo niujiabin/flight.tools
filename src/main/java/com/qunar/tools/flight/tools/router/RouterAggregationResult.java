@@ -23,6 +23,19 @@ public class RouterAggregationResult {
      */
     private Map<FlightPriceKey, FlightPrice> priceMap;
 
+    /**
+     * 代理商信息
+     */
+    private String domain;
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
     public Map<FlightPriceKey, FlightPrice> getPriceMap() {
         return priceMap;
     }
