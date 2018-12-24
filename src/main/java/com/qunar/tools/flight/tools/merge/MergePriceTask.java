@@ -40,17 +40,14 @@ public class MergePriceTask implements Runnable {
 
     @Override
     public void run() {
-
         //router 报价结果
         RouterAggregationResult routerAggregationResult = message.getRouterAggregationResult();
-
         //router 报价搜索参数
         RouterSearchParam routerSearchParam = message.getRouterSearchParam();
         //禁售过滤
         RouterAggregationResult routerAggregationFilteredResult = mergeBanSalePriceFilter.priceFilter(routerSearchParam, routerAggregationResult);
         //报价分类整理
         Pair<RouterAggregationResult, Map<String, Map<String, FlightPriceKey>>> transformResult = priceTransform(routerAggregationFilteredResult, queryId);
-
         //产品需求  自营调价   代理商加价算到比较中
         //some product need to handle
 
