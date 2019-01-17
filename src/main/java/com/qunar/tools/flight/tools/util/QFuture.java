@@ -10,7 +10,14 @@ public class QFuture<V> implements RunnableFuture<V> {
 
     private static final String RESULT = "qunar";
 
+    private static final int NEW = 0;
     private static final int COMPLETING = 1;
+    private static final int NORMAL = 2;
+    private static final int EXCEPTIONAL = 3;
+    private static final int CANCELLED = 4;
+    private static final int INTERRUPTING = 5;
+    private static final int INTERRUPTED = 6;
+
 
     /**
      * 当前任务的状态
@@ -62,7 +69,14 @@ public class QFuture<V> implements RunnableFuture<V> {
      */
     @Override
     public void run() {
-
+        //the run state of the task,initially NEW
+        /**
+         * 1 如果当前的FutureTask运行状态不为NEW 直接返回
+         * 2
+         */
+        if (state != NEW || !UNSAFE.compareAndSwapObject(this, runnerOffset, null, Thread.currentThread())) {
+            return;
+        }
     }
 
     @Override
@@ -157,10 +171,22 @@ public class QFuture<V> implements RunnableFuture<V> {
     }
 
     private static final sun.misc.Unsafe UNSAFE;
+    private static final long stateOffset;
+    private static final long runnerOffset;
+    private static final long waitersOffset;
 
     static {
+
         try {
             UNSAFE = sun.misc.Unsafe.getUnsafe();
+            Class<?> k = FutureTask.class;
+            stateOffset = UNSAFE.objectFieldOffset
+                    (k.getDeclaredField("state"));
+            runnerOffset = UNSAFE.objectFieldOffset
+                    (k.getDeclaredField("runner"));
+            waitersOffset = UNSAFE.objectFieldOffset
+                    (k.getDeclaredField("waiters"));
+
         } catch (Exception e) {
             throw new Error(e);
         }
