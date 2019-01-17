@@ -1,5 +1,9 @@
 package com.qunar.tools.flight.other;
 
+import com.google.common.collect.Sets;
+
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.FutureTask;
 
 /**
@@ -7,7 +11,7 @@ import java.util.concurrent.FutureTask;
  */
 public class UnSafeTest {
 
-    private int age;
+   /* private int age;
 
     private static final sun.misc.Unsafe UNSAFE;
     private static final long stateOffset;
@@ -26,9 +30,28 @@ public class UnSafeTest {
         } catch (Exception e) {
             throw new Error(e);
         }
-    }
+    }*/
 
     public static void main(String[] args) {
 
+        HashSet<String> s1 = Sets.newHashSet();
+        s1.add("a");
+        s1.add("b");
+
+        HashSet<String> s2 = Sets.newHashSet();
+        s2.add("a");
+        s2.add("b");
+        s2.add("c");
+        System.out.println(strictMatch(s1,s2));
+    }
+
+    public static boolean strictMatch(Set<String> data,Set<String> candidates) {
+
+        for (String item : data) {
+            if (!candidates.contains(item)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
