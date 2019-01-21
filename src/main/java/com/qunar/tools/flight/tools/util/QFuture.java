@@ -1,5 +1,6 @@
 package com.qunar.tools.flight.tools.util;
 
+import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -25,7 +26,6 @@ public class QFuture<V> implements RunnableFuture<V> {
     private volatile int state;
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-
 
         /**
          * Callable　带有返回值　而且可以抛出异常
