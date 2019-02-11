@@ -1,6 +1,9 @@
 package com.qunar.tools.flight.tools.leetcode;
 
-import java.util.List;
+import org.springframework.util.CollectionUtils;
+
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * @author jiabin.niu
@@ -16,11 +19,38 @@ import java.util.List;
  * [-1, 0, 1],
  * [-1, -1, 2]
  * ]
+ * <p>
+ * <p>
+ * <p>
+ * <p>
+ * 解决思路可以说是一种贪心法  双指针
  */
 public class LeetCode三数之和 {
 
     public List<List<Integer>> threeSum(int[] nums) {
-        return null;
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            int l = i + 1, r = nums.length - 1;
+            while (l < r) {
+                ArrayList<Integer> stepRes = new ArrayList<>();
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum == 0) {
+                    stepRes.add(nums[i]);
+                    stepRes.add(nums[l]);
+                    stepRes.add(nums[r]);
+                    if (!list.contains(stepRes)) {
+                        list.add(stepRes);
+                    }
+                }
+                if (sum <= 0) {
+                    l++;
+                } else {
+                    r--;
+                }
+            }
+        }
+        return list;
     }
 
     public static void main(String[] args) {
