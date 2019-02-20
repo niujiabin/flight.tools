@@ -110,6 +110,7 @@ public class QArrayBlockingQueue<E> extends AbstractQueue<E> implements Blocking
         }
         count++;
         //唤醒非空等待队列
+        Integer s = new Integer(111);
     }
 
     @Override
