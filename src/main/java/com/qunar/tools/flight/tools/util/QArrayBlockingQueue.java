@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -18,6 +19,11 @@ public class QArrayBlockingQueue<E> extends AbstractQueue<E> implements Blocking
     private Object[] items;
 
     private ReentrantLock lock;
+
+    private final Condition notEmpty;
+
+    private final Condition notFull;
+
     /**
      * 当前队列大小
      */
@@ -27,6 +33,8 @@ public class QArrayBlockingQueue<E> extends AbstractQueue<E> implements Blocking
     public QArrayBlockingQueue(int capacity) {
         items = new Object[capacity];
         lock = new ReentrantLock();
+        notEmpty = lock.newCondition();
+        notFull = lock.newCondition();
     }
 
 
@@ -42,7 +50,16 @@ public class QArrayBlockingQueue<E> extends AbstractQueue<E> implements Blocking
 
     @Override
     public void put(E e) throws InterruptedException {
-
+        final ReentrantLock lock = this.lock;
+        lock.lockInterruptibly();
+        try {
+            while (count == items.length) {
+                notFull.await();
+            }
+            enqueue(e);
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
@@ -105,12 +122,14 @@ public class QArrayBlockingQueue<E> extends AbstractQueue<E> implements Blocking
     private void enqueue(E e) {
         final Object[] items = this.items;
         items[putIndex] = e;
-        if (++putIndex == items.length){
+        //这里类似使用数组实现一个环形队列
+        if (++putIndex == items.length) {
             putIndex = 0;
         }
         count++;
         //唤醒非空等待队列
-        Integer s = new Integer(111);
+        //可以放入元素 说明队列非空
+        notEmpty.signal();
     }
 
     @Override
