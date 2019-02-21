@@ -8,6 +8,7 @@ public class LeetCode62不同路径 {
     public int uniquePaths(int m, int n) {
         int min = Math.min(m, n);
         int[] store = new int[min];
+
         int max = Math.max(m, n);
         for (int i = 0; i < min; i++) {
             store[i] = 1;
