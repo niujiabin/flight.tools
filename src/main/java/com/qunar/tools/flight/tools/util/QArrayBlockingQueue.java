@@ -8,8 +8,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
  * @author : jiabin.niu
  **/
@@ -52,7 +50,6 @@ public class QArrayBlockingQueue<E> extends AbstractQueue<E> implements Blocking
 
     @Override
     public void put(E e) throws InterruptedException {
-        checkNotNull(e);
         final ReentrantLock lock = this.lock;
         lock.lockInterruptibly();
         try {
@@ -130,6 +127,7 @@ public class QArrayBlockingQueue<E> extends AbstractQueue<E> implements Blocking
             putIndex = 0;
         }
         count++;
+        //唤醒非空等待队列
         //可以放入元素 说明队列非空
         notEmpty.signal();
     }
